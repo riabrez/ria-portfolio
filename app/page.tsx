@@ -1,8 +1,65 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const TABS = ["about", "projects", "links"];
+
+// little client component to show Last.fm
+function NowPlaying() {
+  const [track, setTrack] = useState<null | {
+    playing: boolean;
+    title?: string;
+    artist?: string;
+    image?: string;
+    url?: string;
+  }>(null);
+
+  useEffect(() => {
+    async function fetchTrack() {
+      try {
+        const res = await fetch("/api/now-playing");
+        const data = await res.json();
+        setTrack(data);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    fetchTrack();
+    const id = setInterval(fetchTrack, 30000); // refresh every 30s
+    return () => clearInterval(id);
+  }, []);
+
+  if (!track) {
+    return <p className="text-sm text-[#233025]/60">loading…</p>;
+  }
+
+  if (!track.playing) {
+    return <p className="text-sm text-[#233025]/70">nothing playing 💭</p>;
+  }
+
+  return (
+    <a
+      href={track.url}
+      target="_blank"
+      className="flex items-center gap-2 text-sm text-[#233025]/90 hover:underline"
+    >
+      {track.image ? (
+        <img
+          src={track.image}
+          alt="album"
+          className="w-9 h-9 rounded-md border border-[#cdd8cc]"
+        />
+      ) : null}
+      <div>
+        <p className="font-semibold leading-tight">{track.title}</p>
+        <p className="text-xs text-[#233025]/60 leading-tight">
+          {track.artist}
+        </p>
+      </div>
+    </a>
+  );
+}
 
 export default function Page() {
   const [active, setActive] = useState("about");
@@ -54,7 +111,7 @@ export default function Page() {
             <div className="flex-shrink-0 w-full max-w-[350px]">
               <div className="w-full aspect-square max-h-[350px] rounded-[1.25rem] bg-[#cdd8cc] border-[3px] border-[#3f5b42] overflow-hidden flex items-center justify-center">
                 <span className="text-[12px] text-[#233025]/60 text-center px-3">
-                  your photo here 
+                  your photo here
                 </span>
               </div>
               <div className="mt-3 bg-white/80 rounded-md p-3 text-xs text-[#233025] border border-[#3f5b42]/15">
@@ -69,22 +126,22 @@ export default function Page() {
             {/* right about text */}
             <div className="flex-1 space-y-4">
               <div className="bg-[#f6f8f5] border-[2px] border-[#cdd8cc] rounded-2xl p-5 space-y-3">
-                <p className="text-xs uppercase text-[#3f5b42]">
-                  about me
+                <p className="text-sm font-bold text-[#3f5b42]">
+                  About me
                 </p>
                 <h1 className="text-2xl md:text-3xl font-semibold text-[#233025]">
-                  Hey, I&apos;m Ria 
+                  Hey, I&apos;m Ria
                 </h1>
                 <p className="text-sm text-[#233025]/90 leading-relaxed">
-                  lorem ipssum dolor sit amet, consectetur adipiscing elit, sed do
-                  eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                  enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                  nisi ut aliquip ex ea commodo consequat.
+                  lorem ipssum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                  laboris nisi ut aliquip ex ea commodo consequat.
                 </p>
                 <p className="text-sm text-[#233025]/80">
-                  loren ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                  eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                  enim ad minim veniam. 
+                  loren ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam.
                 </p>
               </div>
 
@@ -93,8 +150,7 @@ export default function Page() {
                   <p className="text-xs font-semibold text-[#233025] mb-1">
                     current modules 📚
                   </p>
-                  <br></br>
-                  <ol className="text-sm text-[#233025]/90 space-y-1">
+                  <ol className="text-sm text-[#233025]/90 space-y-1 mt-1">
                     <li>• Algorithmics</li>
                     <li>• Systems Programming</li>
                     <li>• HCSDE</li>
@@ -106,9 +162,8 @@ export default function Page() {
                   <p className="text-xs font-semibold text-[#233025] mb-1">
                     now playing 🎧
                   </p>
-                  <p className="text-sm text-[#233025]/80">
-                    (Spotify / Last.fm widget later)
-                  </p>
+                  {/* actual Last.fm component */}
+                  <NowPlaying />
                 </div>
               </div>
             </div>
@@ -118,33 +173,25 @@ export default function Page() {
         {/* PROJECTS TAB */}
         {active === "projects" && (
           <div className="space-y-4">
-            <p className="text-xs uppercase text-[#3f5b42]">
-              projects
-            </p>
+            <p className="text-xs uppercase text-[#3f5b42]">projects</p>
             <div className="grid md:grid-cols-3 gap-4">
               <div className="bg-[#f6f8f5] border-[2px] border-[#cdd8cc] rounded-xl p-4">
                 <p className="text-sm font-semibold text-[#233025] mb-1">
                   placeholder
                 </p>
-                <p className="text-xs text-[#233025]/80">
-                  placeholder
-                </p>
+                <p className="text-xs text-[#233025]/80">placeholder</p>
               </div>
               <div className="bg-[#f6f8f5] border-[2px] border-[#cdd8cc] rounded-xl p-4">
                 <p className="text-sm font-semibold text-[#233025] mb-1">
                   placeholder
                 </p>
-                <p className="text-xs text-[#233025]/80">
-                  placeholder
-                </p>
+                <p className="text-xs text-[#233025]/80">placeholder</p>
               </div>
               <div className="bg-[#f6f8f5] border-[2px] border-[#cdd8cc] rounded-xl p-4">
                 <p className="text-sm font-semibold text-[#233025] mb-1">
                   placeholder
                 </p>
-                <p className="text-xs text-[#233025]/80">
-                  placeholder
-                </p>
+                <p className="text-xs text-[#233025]/80">placeholder</p>
               </div>
             </div>
           </div>
@@ -157,16 +204,14 @@ export default function Page() {
               links / socials
             </p>
             <div className="flex flex-wrap gap-2">
-              {["GitHub", "LinkedIn", "Instagram", "Email"].map(
-                (item) => (
-                  <button
-                    key={item}
-                    className="bg-[#ecf1ea] border-[2px] border-dashed border-[#3f5b42]/40 rounded-md px-3 py-1 text-[11px] text-[#233025] hover:bg-[#e4ebe4]"
-                  >
-                    {item}
-                  </button>
-                )
-              )}
+              {["GitHub", "LinkedIn", "Instagram", "Email"].map((item) => (
+                <button
+                  key={item}
+                  className="bg-[#ecf1ea] border-[2px] border-dashed border-[#3f5b42]/40 rounded-md px-3 py-1 text-[11px] text-[#233025] hover:bg-[#e4ebe4]"
+                >
+                  {item}
+                </button>
+              ))}
             </div>
             <div className="bg-[#f6f8f5] border-[2px] border-[#cdd8cc] rounded-xl p-4 text-sm text-[#233025]/85">
               Placeholder
