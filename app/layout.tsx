@@ -1,17 +1,20 @@
 import "./globals.css";
+import type { Metadata } from "next";
 
-export const metadata = {
-  title: "Ria | Portfolio",
-  description: "Personal website built with Next.js, TypeScript, and Tailwind CSS.",
+export const metadata: Metadata = {
+  title: "Ria • Portfolio",
+  description: "Carrd-style personal site.",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="en" className="bg-zinc-950">
-      <body className="min-h-screen text-zinc-100">
-        <div className="mx-auto max-w-5xl px-4">
-          <main className="py-10">{children}</main>
-        </div>
+    <html lang="en">
+      <body className="min-h-screen bg-green-pattern flex items-center justify-center p-4">
+        {children}
       </body>
     </html>
   );
