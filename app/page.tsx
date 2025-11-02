@@ -7,6 +7,25 @@ import Sticker from "./components/Sticker";
 
 const TABS = ["about", "projects", "links"];
 
+const PROJECTS = [
+  {
+    name: "Personal Portfolio",
+    role: "Design & Development · Next.js, Tailwind",
+    desc: "A custom-built personal portfolio (this website!) developed from scratch with Next.js and Tailwind. It features a minimalist dark-mode layout, tabbed navigation, subtle animations, and a live Last.fm integration — all designed to showcase my frontend and UI design skills.",
+    link: "https://github.com/riabrez/ria-portfolio",
+    year: "2025",
+  },
+  {
+    name: "UniDFood – Student Food Spot Finder",
+    role: "Coursework · Django, HTML, CSS, JavaScript",
+    desc: "A collaborative web app built for the Web App Development course at UofG. I focused on the frontend, designing responsive Django templates and refining page layouts for login, reviews, and meetups.",
+    link: "https://github.com/riabrez/UnidFood",
+    year: "2024",
+  },
+];
+
+
+
 export default function Page() {
   const [active, setActive] = useState("about");
 
@@ -38,11 +57,10 @@ export default function Page() {
             <button
               key={tab}
               onClick={() => setActive(tab)}
-              className={`px-4 py-2 rounded-t-xl text-sm capitalize border transition ${
-                active === tab
-                  ? "bg-[#151515] border-[#2b2b2b] text-white shadow-[0_2px_0_#111111]"
-                  : "bg-[#111111] border-transparent text-[#a1a1aa] hover:bg-[#151515]"
-              }`}
+              className={`px-4 py-2 rounded-t-xl text-sm capitalize border transition ${active === tab
+                ? "bg-[#151515] border-[#2b2b2b] text-white shadow-[0_2px_0_#111111]"
+                : "bg-[#111111] border-transparent text-[#a1a1aa] hover:bg-[#151515]"
+                }`}
             >
               {tab}
             </button>
@@ -84,7 +102,7 @@ export default function Page() {
                   </h1>
                   <p className="text-sm text-[#d1d5db]/80 leading-relaxed">
                     I'm Ria - a third-year Software Engineering student at the University of Glasgow with a focus on frontend and full-stack development.
-                    I love creating clean, user-friendly web applications and exploring new technologies. When I'm not coding, you can find 
+                    I love creating clean, user-friendly web applications and exploring new technologies. When I'm not coding, you can find
                     me playing around with music software or writing film reviews.
 
                   </p>
@@ -126,31 +144,65 @@ export default function Page() {
           {/* PROJECTS TAB */}
           {active === "projects" && (
             <div className="space-y-4">
-              <p className="text-xs uppercase text-[#a1a1aa] tracking-wide">
-                projects
-              </p>
-              <div className="grid md:grid-cols-3 gap-4">
-                <div className="bg-[#161616] border border-[#2a2a2a] rounded-xl p-4">
-                  <p className="text-sm font-semibold text-white mb-1">
-                    placeholder
-                  </p>
-                  <p className="text-xs text-[#a1a1aa]">placeholder</p>
-                </div>
-                <div className="bg-[#161616] border border-[#2a2a2a] rounded-xl p-4">
-                  <p className="text-sm font-semibold text-white mb-1">
-                    placeholder
-                  </p>
-                  <p className="text-xs text-[#a1a1aa]">placeholder</p>
-                </div>
-                <div className="bg-[#161616] border border-[#2a2a2a] rounded-xl p-4">
-                  <p className="text-sm font-semibold text-white mb-1">
-                    placeholder
-                  </p>
-                  <p className="text-xs text-[#a1a1aa]">placeholder</p>
-                </div>
+              <div className="flex items-center justify-between">
+                <p className="text-xs uppercase tracking-wide text-[#a1a1aa]">
+                  projects
+                </p>
+                <p className="text-[11px] text-[#6b7280]">
+                  {PROJECTS.length} total
+                </p>
+              </div>
+
+              {/* cards */}
+              <div className="grid md:grid-cols-2 gap-5">
+                {PROJECTS.map((project) => (
+                  <div
+                    key={project.name}
+                    className="bg-[#161616] border border-[#2a2a2a] rounded-xl p-5 flex flex-col gap-3 hover:border-[#3b82f6]/60 transition min-h-[230px] md:min-h-[250px]"
+                  >
+                    {/* top: title + link */}
+                    <div className="flex items-start justify-between gap-2">
+                      <div>
+                        <p className="text-sm font-semibold text-white leading-tight">
+                          {project.name}
+                        </p>
+                        <p className="text-[11px] text-[#9ca3af] leading-tight mt-1">
+                          {project.role}
+                        </p>
+                      </div>
+                      {project.link ? (
+                        <a
+                          href={project.link}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-[#93c5fd] text-xs hover:underline shrink-0"
+                        >
+                          GitHub ↗
+                        </a>
+                      ) : null}
+                    </div>
+
+                    {/* description */}
+                    <p className="text-[12.5px] text-[#d1d5db]/80 leading-relaxed">
+                      {project.desc}
+                    </p>
+
+                    {/* footer */}
+                    <div className="flex items-center gap-2 mt-auto pt-2">
+                      <span className="inline-flex items-center gap-1 px-2 py-[3px] rounded-full bg-[#0f172a]/30 text-[10px] text-[#bfdbfe]">
+                        {project.year}
+                      </span>
+                      <span className="text-[10px] text-[#525252]">
+                        • updated recently
+                      </span>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           )}
+
+
 
           {/* LINKS TAB */}
           {active === "links" && (
