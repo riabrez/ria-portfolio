@@ -28,6 +28,7 @@ const PROJECTS = [
 
 export default function Page() {
   const [active, setActive] = useState("about");
+  const [lastUpdated, setLastUpdated] = useState("");
 
   return (
     <div className="w-full min-h-screen flex items-center justify-center px-4 py-10">
@@ -35,8 +36,8 @@ export default function Page() {
         {/* stitched top bar */}
         <div className="bg-stitch-dark border-b border-[#1f1f1f] px-5 py-2 flex items-center justify-between text-[11px] text-[#e5e5e5]/85">
           <span className="font-semibold">riabrez</span>
-          <span className="opacity-55">
-            last updated: {new Date().toLocaleDateString()}
+          <span className="opacity-70">
+            last updated: {lastUpdated || "—"}
           </span>
         </div>
 
@@ -73,9 +74,9 @@ export default function Page() {
           {active === "about" && (
             <div className="flex flex-col lg:flex-row gap-6 lg:items-stretch">
               {/* LEFT COLUMN */}
-              <div className="w-full lg:max-w-[340px] lg:flex lg:flex-col lg:justify-between">
+              <div className="w-full lg:max-w-[360px] flex flex-col justify-between h-full">
                 {/* photo */}
-                <div className="w-full aspect-square max-h-[350px] rounded-[1.25rem] bg-[#0a0a0a] border border-[#2a2a2a] overflow-hidden">
+                <div className="w-full rounded-[1.25rem] bg-[#0a0a0a] border border-[#2a2a2a] overflow-hidden">
                   <Image
                     src="/portfolio.jpg"
                     alt="Photo of Ria"
@@ -87,14 +88,37 @@ export default function Page() {
                 </div>
 
                 {/* info card */}
-                <div className="mt-3 lg:mt-4 bg-[#101010]/70 rounded-md p-3 text-xs text-[#e5e5e5] border border-[#2a2a2a] backdrop-blur">
-                  <p className="font-semibold text-sm">Maria Brzezinska</p>
-                  <p className="text-[#cbd5f5]">Software Engineering • UofG</p>
-                  <p className="mt-1 text-[0.65rem] text-[#9ca3af]">
-                    Glasgow · open to projects 💌
-                  </p>
+                <div className="mt-3 flex flex-col gap-2">
+                  <div className="bg-[#101010]/70 rounded-md p-3 text-xs text-[#e5e5e5] border border-[#2a2a2a] backdrop-blur">
+                    <p className="font-semibold text-sm">Maria Brzezinska</p>
+                    <p className="text-[#cbd5f5]">Software Engineering • UofG</p>
+                    <p className="mt-1 text-[0.65rem] text-[#9ca3af]">
+                      Glasgow · open to projects 💌
+                    </p>
+                  </div>
+
+                  {/* socials row */}
+                  <div className="bg-[#101010]/70 rounded-md p-3 text-xs text-[#e5e5e5] border border-[#2a2a2a] backdrop-blur flex items-center justify-between gap-2">
+                    {[
+                      { name: "GitHub", url: "https://github.com/riabrez" },
+                      { name: "LinkedIn", url: "https://www.linkedin.com/in/maria-brzezinska/" },
+                      { name: "Instagram", url: "https://instagram.com/riabrez" },
+                      { name: "Email", url: "mailto:maria060804@gmail.com" },
+                    ].map((social) => (
+                      <a
+                        key={social.name}
+                        href={social.url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-[11px] px-3 py-[6px] rounded-md border border-[#2a2a2a] bg-[#181818] text-center hover:border-[#3b82f6]/60 hover:text-[#93c5fd] transition whitespace-nowrap"
+                      >
+                        {social.name}
+                      </a>
+                    ))}
+                  </div>
                 </div>
               </div>
+
 
               {/* RIGHT COLUMN */}
               <div className="flex-1 space-y-4">
@@ -122,7 +146,8 @@ export default function Page() {
                     <p className="text-xs font-semibold text-white mb-1">
                       current modules 📚
                     </p>
-                    <ol className="text-sm text-[#d4d4d4] space-y-1 mt-1">
+                    <br></br>
+                    <ol className="text-sm text-[#d4d4d4] space-y-1 mt-1 leading-loose">
                       <li>• Algorithmics</li>
                       <li>• Systems Programming</li>
                       <li>• HCSDE</li>
