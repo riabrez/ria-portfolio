@@ -31,8 +31,6 @@ body {
   font-family: Arial, sans-serif;
 }
 
-/* --- renamed classes --- */
-
 /* pattern background (grey on black) */
 .bg-dark-pattern {
   background-color: #0a0a0a;
@@ -62,4 +60,24 @@ body {
       transparent 6px
     );
   background-size: 8px 8px;
+}
+
+/* glow text animation */
+@keyframes floating {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+}
+
+/* custom utility for Tailwind v4 style */
+@utility floating {
+  animation: floating 3s ease-in-out infinite;
+}
+
+/* optional glow */
+@utility glowtext {
+  text-shadow: 0 0 12px rgba(147, 197, 253, 0.35);
 }

@@ -49,7 +49,7 @@ export default function Page() {
         </div>
 
         {/* tab content area */}
-        <div className="p-6 md:p-8 bg-[#151515] min-h-[560px] max-h-[605px] overflow-y-auto rounded-b-[1.75rem] scrollbar-thin scrollbar-thumb-[#2b2b2b] scrollbar-track-transparent">
+        <div className="p-6 md:p-8 bg-[#151515] min-h-[605px] max-h-[605px] overflow-y-auto rounded-b-[1.75rem] scrollbar-thin scrollbar-thumb-[#2b2b2b] scrollbar-track-transparent">
           {/* ABOUT TAB */}
           {active === "about" && (
             <div className="flex flex-col lg:flex-row gap-6 items-start">
@@ -77,8 +77,8 @@ export default function Page() {
               {/* right about text */}
               <div className="flex-1 space-y-4">
                 <div className="bg-[#161616] border border-[#2a2a2a] rounded-2xl p-5 space-y-3">
-                  <p className="text-sm font-bold text-[#d4d4d4]">About me</p>
-                  <h1 className="text-2xl md:text-3xl font-semibold text-white">
+                  {/* <p className="text-sm font-bold text-[#d4d4d4]">About me</p> */}
+                  <h1 className="text-2xl md:text-3xl font-semibold text-white floating shadow glowtext">
                     Hey, I&apos;m Ria
                   </h1>
                   <p className="text-sm text-[#d1d5db]/80 leading-relaxed">
@@ -99,7 +99,7 @@ export default function Page() {
                       current modules 📚
                     </p>
                     <br></br>
-                    <ol className="text-sm text-[#d4d4d4] space-y-1 mt-1">
+                    <ol className="text-sm text-[#d4d4d4] space-y-1 mt-1 leading-loose">
                       <li>• Algorithmics</li>
                       <li>• Systems Programming</li>
                       <li>• HCSDE</li>
