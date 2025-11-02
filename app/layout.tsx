@@ -6,16 +6,13 @@ export const metadata: Metadata = {
   description: "Carrd-style personal site.",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className="min-h-screen bg-green-pattern flex items-center justify-center p-4">
+      <body className="bg-dark-pattern min-h-screen">
         {children}
       </body>
     </html>
   );
 }
+

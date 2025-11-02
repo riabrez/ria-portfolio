@@ -38,7 +38,7 @@ export async function GET() {
       url: first.url,
     } : null;
 
-    const recent = (nowPlaying ? rest : tracks).map((t) => ({
+    const recent = (nowPlaying ? rest : tracks).map((t: { name: any; artist: { [x: string]: any; }; image: string | any[]; url: any; }) => ({
       title: t.name,
       artist: t.artist?.["#text"] ?? "",
       image: t.image?.[t.image.length - 1]?.["#text"],
