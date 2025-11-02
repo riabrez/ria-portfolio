@@ -1,27 +1,53 @@
 import { NextResponse } from "next/server";
 
-const USER = "hyoseop"; 
-const API_KEY = process.env.LASTFM_API_KEY; 
-
 export async function GET() {
-  const res = await fetch(
-    `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${USER}&api_key=${API_KEY}&format=json&limit=1`,
-    { next: { revalidate: 30 } } 
-  );
+  const user = process.env.LASTFM_USER;
+  const key = process.env.LASTFM_API_KEY;
 
-  const data = await res.json();
-  const track = data?.recenttracks?.track?.[0];
-
-  if (!track) {
-    return NextResponse.json({ playing: false });
+  if (!user || !key) {
+    return NextResponse.json({ error: "Missing env vars", now: null, recent: [] });
   }
 
-  return NextResponse.json({
-    playing: track["@attr"]?.nowplaying === "true",
-    title: track.name,
-    artist: track.artist["#text"],
-    album: track.album["#text"],
-    image: track.image?.pop()?.["#text"],
-    url: track.url,
-  });
+  try {
+    const url = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${encodeURIComponent(
+      user
+    )}&api_key=${key}&format=json&limit=4`;
+
+    const res = await fetch(url);
+    const data = await res.json();
+
+    if (!res.ok || data?.error) {
+      return NextResponse.json({
+        error: `Last.fm returned ${res.status} ${data?.message ?? ""}`.trim(),
+        now: null,
+        recent: [],
+      });
+    }
+
+    const tracks = data?.recenttracks?.track ?? [];
+    if (!tracks.length) {
+      return NextResponse.json({ now: null, recent: [] });
+    }
+
+    const [first, ...rest] = tracks;
+    const nowPlaying = first?.["@attr"]?.nowplaying === "true" ? {
+      playing: true,
+      title: first.name,
+      artist: first.artist?.["#text"] ?? "",
+      image: first.image?.[first.image.length - 1]?.["#text"],
+      url: first.url,
+    } : null;
+
+    const recent = (nowPlaying ? rest : tracks).map((t) => ({
+      title: t.name,
+      artist: t.artist?.["#text"] ?? "",
+      image: t.image?.[t.image.length - 1]?.["#text"],
+      url: t.url,
+    }));
+
+    return NextResponse.json({ now: nowPlaying, recent });
+  } catch (e) {
+    console.error(e);
+    return NextResponse.json({ error: "Fetch failed", now: null, recent: [] });
+  }
 }

@@ -1,65 +1,10 @@
 "use client";
 
+import Image from "next/image";
+import NowPlaying from "./components/NowPlaying";
 import { useState, useEffect } from "react";
 
 const TABS = ["about", "projects", "links"];
-
-// little client component to show Last.fm
-function NowPlaying() {
-  const [track, setTrack] = useState<null | {
-    playing: boolean;
-    title?: string;
-    artist?: string;
-    image?: string;
-    url?: string;
-  }>(null);
-
-  useEffect(() => {
-    async function fetchTrack() {
-      try {
-        const res = await fetch("/api/now-playing");
-        const data = await res.json();
-        setTrack(data);
-      } catch (err) {
-        console.error(err);
-      }
-    }
-
-    fetchTrack();
-    const id = setInterval(fetchTrack, 30000); // refresh every 30s
-    return () => clearInterval(id);
-  }, []);
-
-  if (!track) {
-    return <p className="text-sm text-[#233025]/60">loading…</p>;
-  }
-
-  if (!track.playing) {
-    return <p className="text-sm text-[#233025]/70">nothing playing 💭</p>;
-  }
-
-  return (
-    <a
-      href={track.url}
-      target="_blank"
-      className="flex items-center gap-2 text-sm text-[#233025]/90 hover:underline"
-    >
-      {track.image ? (
-        <img
-          src={track.image}
-          alt="album"
-          className="w-9 h-9 rounded-md border border-[#cdd8cc]"
-        />
-      ) : null}
-      <div>
-        <p className="font-semibold leading-tight">{track.title}</p>
-        <p className="text-xs text-[#233025]/60 leading-tight">
-          {track.artist}
-        </p>
-      </div>
-    </a>
-  );
-}
 
 export default function Page() {
   const [active, setActive] = useState("about");
@@ -107,12 +52,17 @@ export default function Page() {
         {/* ABOUT TAB */}
         {active === "about" && (
           <div className="flex flex-col lg:flex-row gap-6 items-start">
-            {/* left photo */}
+            {/* left photo + card */}
             <div className="flex-shrink-0 w-full max-w-[350px]">
-              <div className="w-full aspect-square max-h-[350px] rounded-[1.25rem] bg-[#cdd8cc] border-[3px] border-[#3f5b42] overflow-hidden flex items-center justify-center">
-                <span className="text-[12px] text-[#233025]/60 text-center px-3">
-                  your photo here
-                </span>
+              <div className="w-full aspect-square max-h-[350px] rounded-[1.25rem] bg-[#cdd8cc] border-[3px] border-[#3f5b42] overflow-hidden">
+                <Image
+                  src="/portfolio.jpg"
+                  alt="Photo of Ria"
+                  width={350}
+                  height={350}
+                  className="object-cover w-full h-full"
+                  priority
+                />
               </div>
               <div className="mt-3 bg-white/80 rounded-md p-3 text-xs text-[#233025] border border-[#3f5b42]/15">
                 <p className="font-semibold text-sm">Maria Brzezinska</p>
@@ -126,9 +76,7 @@ export default function Page() {
             {/* right about text */}
             <div className="flex-1 space-y-4">
               <div className="bg-[#f6f8f5] border-[2px] border-[#cdd8cc] rounded-2xl p-5 space-y-3">
-                <p className="text-sm font-bold text-[#3f5b42]">
-                  About me
-                </p>
+                <p className="text-sm font-bold text-[#3f5b42]">About me</p>
                 <h1 className="text-2xl md:text-3xl font-semibold text-[#233025]">
                   Hey, I&apos;m Ria
                 </h1>
@@ -162,7 +110,6 @@ export default function Page() {
                   <p className="text-xs font-semibold text-[#233025] mb-1">
                     now playing 🎧
                   </p>
-                  {/* actual Last.fm component */}
                   <NowPlaying />
                 </div>
               </div>
@@ -200,9 +147,7 @@ export default function Page() {
         {/* LINKS TAB */}
         {active === "links" && (
           <div className="space-y-4">
-            <p className="text-xs uppercase text-[#3f5b42]">
-              links / socials
-            </p>
+            <p className="text-xs uppercase text-[#3f5b42]">links / socials</p>
             <div className="flex flex-wrap gap-2">
               {["GitHub", "LinkedIn", "Instagram", "Email"].map((item) => (
                 <button
