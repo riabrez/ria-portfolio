@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import NowPlaying from "./components/NowPlaying";
+import Sticker from "./components/Sticker";
 
 const TABS = ["about", "projects", "links"];
 
@@ -49,7 +50,7 @@ export default function Page() {
         </div>
 
         {/* tab content area */}
-        <div className="p-6 md:p-8 bg-[#151515] min-h-[605px] max-h-[605px] overflow-y-auto rounded-b-[1.75rem] scrollbar-thin scrollbar-thumb-[#2b2b2b] scrollbar-track-transparent">
+        <div className="p-6 md:p-8 bg-[#151515] min-h-[590px] max-h-[605px] overflow-y-auto rounded-b-[1.75rem] scrollbar-thin scrollbar-thumb-[#2b2b2b] scrollbar-track-transparent">
           {/* ABOUT TAB */}
           {active === "about" && (
             <div className="flex flex-col lg:flex-row gap-6 items-start">
@@ -174,6 +175,8 @@ export default function Page() {
           )}
         </div>
       </div>
+      {/* sticker floating on the right */}
+      <Sticker />
     </div>
   );
 }
