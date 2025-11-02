@@ -49,7 +49,7 @@ export default function Page() {
         </div>
 
         {/* tab content area */}
-        <div className="p-6 md:p-8 bg-[#151515] min-h-[560px] max-h-[580px] overflow-y-auto rounded-b-[1.75rem] scrollbar-thin scrollbar-thumb-[#2b2b2b] scrollbar-track-transparent">
+        <div className="p-6 md:p-8 bg-[#151515] min-h-[560px] max-h-[605px] overflow-y-auto rounded-b-[1.75rem] scrollbar-thin scrollbar-thumb-[#2b2b2b] scrollbar-track-transparent">
           {/* ABOUT TAB */}
           {active === "about" && (
             <div className="flex flex-col lg:flex-row gap-6 items-start">
@@ -82,15 +82,13 @@ export default function Page() {
                     Hey, I&apos;m Ria
                   </h1>
                   <p className="text-sm text-[#d1d5db]/80 leading-relaxed">
-                    lorem ipssum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    I'm Ria - a third-year Software Engineering student at the University of Glasgow with a focus on frontend and full-stack development.
+                    I love creating clean, user-friendly web applications and exploring new technologies. When I'm not coding, you can find 
+                    me playing around with music software or writing film reviews.
+
                   </p>
                   <p className="text-sm text-[#9ca3af]">
-                    loren ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam.
+                    Currently exploring React, Next.js, and TypeScript. Always eager to learn and take on new challenges!
                   </p>
                 </div>
 
@@ -100,6 +98,7 @@ export default function Page() {
                     <p className="text-xs font-semibold text-white mb-1">
                       current modules 📚
                     </p>
+                    <br></br>
                     <ol className="text-sm text-[#d4d4d4] space-y-1 mt-1">
                       <li>• Algorithmics</li>
                       <li>• Systems Programming</li>
