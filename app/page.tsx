@@ -71,9 +71,10 @@ export default function Page() {
         <div className="p-6 md:p-8 bg-[#151515] min-h-[590px] max-h-[605px] overflow-y-auto rounded-b-[1.75rem] scrollbar-thin scrollbar-thumb-[#2b2b2b] scrollbar-track-transparent">
           {/* ABOUT TAB */}
           {active === "about" && (
-            <div className="flex flex-col lg:flex-row gap-6 items-start">
-              {/* left photo + card */}
-              <div className="flex-shrink-0 w-full max-w-[350px]">
+            <div className="flex flex-col lg:flex-row gap-6 lg:items-stretch">
+              {/* LEFT COLUMN */}
+              <div className="w-full lg:max-w-[340px] lg:flex lg:flex-col lg:justify-between">
+                {/* photo */}
                 <div className="w-full aspect-square max-h-[350px] rounded-[1.25rem] bg-[#0a0a0a] border border-[#2a2a2a] overflow-hidden">
                   <Image
                     src="/portfolio.jpg"
@@ -84,7 +85,9 @@ export default function Page() {
                     priority
                   />
                 </div>
-                <div className="mt-3 bg-[#101010]/70 rounded-md p-3 text-xs text-[#e5e5e5] border border-[#2a2a2a] backdrop-blur">
+
+                {/* info card */}
+                <div className="mt-3 lg:mt-4 bg-[#101010]/70 rounded-md p-3 text-xs text-[#e5e5e5] border border-[#2a2a2a] backdrop-blur">
                   <p className="font-semibold text-sm">Maria Brzezinska</p>
                   <p className="text-[#cbd5f5]">Software Engineering • UofG</p>
                   <p className="mt-1 text-[0.65rem] text-[#9ca3af]">
@@ -93,32 +96,33 @@ export default function Page() {
                 </div>
               </div>
 
-              {/* right about text */}
+              {/* RIGHT COLUMN */}
               <div className="flex-1 space-y-4">
+                {/* about box */}
                 <div className="bg-[#161616] border border-[#2a2a2a] rounded-2xl p-5 space-y-3">
-                  {/* <p className="text-sm font-bold text-[#d4d4d4]">About me</p> */}
-                  <h1 className="text-2xl md:text-3xl font-semibold text-white floating shadow glowtext">
+                  <p className="text-sm font-bold text-[#d4d4d4]">About me</p>
+                  <h1 className="text-2xl md:text-3xl font-semibold text-white floating glowtext">
                     Hey, I&apos;m Ria
                   </h1>
                   <p className="text-sm text-[#d1d5db]/80 leading-relaxed">
-                    I'm Ria - a third-year Software Engineering student at the University of Glasgow with a focus on frontend and full-stack development.
-                    I love creating clean, user-friendly web applications and exploring new technologies. When I'm not coding, you can find
-                    me playing around with music software or writing film reviews.
-
+                    I&apos;m Ria – a third-year Software Engineering student at the University of Glasgow
+                    with a focus on frontend and full-stack development. I love creating clean, user-friendly
+                    web applications and exploring new technologies.
                   </p>
                   <p className="text-sm text-[#9ca3af]">
-                    Currently exploring React, Next.js, and TypeScript. Always eager to learn and take on new challenges!
+                    Currently exploring React, Next.js, and TypeScript. Always eager to learn and take on new
+                    challenges!
                   </p>
                 </div>
 
-                <div className="grid sm:grid-cols-2 gap-3">
-                  {/* modules card */}
-                  <div className="bg-[#161616] border border-[#2a2a2a] rounded-xl p-3">
+                {/* bottom two cards */}
+                <div className="grid sm:grid-cols-2 gap-3 items-stretch">
+                  {/* modules */}
+                  <div className="bg-[#161616] border border-[#2a2a2a] rounded-xl p-3 flex flex-col h-full">
                     <p className="text-xs font-semibold text-white mb-1">
                       current modules 📚
                     </p>
-                    <br></br>
-                    <ol className="text-sm text-[#d4d4d4] space-y-1 mt-1 leading-loose">
+                    <ol className="text-sm text-[#d4d4d4] space-y-1 mt-1">
                       <li>• Algorithmics</li>
                       <li>• Systems Programming</li>
                       <li>• HCSDE</li>
@@ -127,12 +131,12 @@ export default function Page() {
                     </ol>
                   </div>
 
-                  {/* now playing card */}
-                  <div className="bg-[#161616] border border-[#2a2a2a] rounded-xl p-3 flex flex-col min-h-[190px]">
+                  {/* now playing */}
+                  <div className="bg-[#161616] border border-[#2a2a2a] rounded-xl p-3 flex flex-col h-full">
                     <p className="text-xs font-semibold text-white mb-2 flex items-center gap-1">
-                      now playing <span className="text-[10px]">💡</span>
+                      now playing 🧠
                     </p>
-                    <div className="flex-1">
+                    <div className="flex-1 min-h-0">
                       <NowPlaying />
                     </div>
                   </div>
@@ -140,6 +144,7 @@ export default function Page() {
               </div>
             </div>
           )}
+
 
           {/* PROJECTS TAB */}
           {active === "projects" && (
