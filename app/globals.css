@@ -34,9 +34,16 @@ body {
 /* pattern background (grey on black) */
 .bg-dark-pattern {
   background-color: #0a0a0a;
-  background-image:
-    radial-gradient(circle, rgba(255, 255, 255, 0.05) 2px, rgba(255, 255, 255, 0) 2px),
-    radial-gradient(circle, rgba(255, 255, 255, 0.025) 1px, rgba(255, 255, 255, 0) 1px);
+  background-image: radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.05) 2px,
+      rgba(255, 255, 255, 0) 2px
+    ),
+    radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.025) 1px,
+      rgba(255, 255, 255, 0) 1px
+    );
   background-size: 40px 40px, 20px 20px;
   background-position: 0 0, 10px 10px;
 }
@@ -44,8 +51,7 @@ body {
 /* stitched top bar but dark */
 .bg-stitch-dark {
   background-color: #101010;
-  background-image:
-    repeating-linear-gradient(
+  background-image: repeating-linear-gradient(
       90deg,
       rgba(255, 255, 255, 0.05) 0,
       rgba(255, 255, 255, 0.05) 2px,
@@ -64,7 +70,8 @@ body {
 
 /* glow text animation */
 @keyframes floating {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
@@ -81,3 +88,9 @@ body {
 @utility glowtext {
   text-shadow: 0 0 12px rgba(147, 197, 253, 0.35);
 }
+
+/* Start https://www.cursors-4u.com */
+* {
+  cursor: url(https://cur.cursors-4u.net/nature/nat-10/nat949.ani),
+    url(https://cur.cursors-4u.net/nature/nat-10/nat949.png), auto !important;
+} /* End https://www.cursors-4u.com */
