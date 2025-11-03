@@ -69,12 +69,12 @@ export default function Page() {
         </div>
 
         {/* tab content area */}
-        <div className="p-6 md:p-8 bg-[#151515] min-h-[590px] max-h-[605px] overflow-y-auto rounded-b-[1.75rem] scrollbar-thin scrollbar-thumb-[#2b2b2b] scrollbar-track-transparent">
+        <div className="p-6 md:p-8 bg-[#151515] min-h-[660px] max-h-[605px] overflow-y-auto rounded-b-[1.75rem] scrollbar-thin scrollbar-thumb-[#2b2b2b] scrollbar-track-transparent">
           {/* ABOUT TAB */}
           {active === "about" && (
-            <div className="flex flex-col lg:flex-row gap-6 lg:items-stretch">
+            <div className="flex flex-col lg:flex-row gap-6 lg:items-stretch min-h-[590px]">
               {/* LEFT COLUMN */}
-              <div className="w-full lg:max-w-[360px] flex flex-col justify-between h-full">
+              <div className="w-full lg:max-w-[360px] flex flex-col justify-between h-full min-h-[590px]">
                 {/* photo */}
                 <div className="w-full rounded-[1.25rem] bg-[#0a0a0a] border border-[#2a2a2a] overflow-hidden">
                   <Image
@@ -87,8 +87,9 @@ export default function Page() {
                   />
                 </div>
 
-                {/* info card */}
+                {/* info card + socials */}
                 <div className="mt-3 flex flex-col gap-2">
+                  {/* info card */}
                   <div className="bg-[#101010]/70 rounded-md p-3 text-xs text-[#e5e5e5] border border-[#2a2a2a] backdrop-blur">
                     <p className="font-semibold text-sm">Maria Brzezinska</p>
                     <p className="text-[#cbd5f5]">Software Engineering • UofG</p>
@@ -97,8 +98,8 @@ export default function Page() {
                     </p>
                   </div>
 
-                  {/* socials row */}
-                  <div className="bg-[#101010]/70 rounded-md p-3 text-xs text-[#e5e5e5] border border-[#2a2a2a] backdrop-blur flex items-center justify-between gap-2">
+                  {/* socials row (same links as Links tab) */}
+                  <div className="bg-[#101010]/70 rounded-md p-3 text-xs text-[#e5e5e5] border border-[#2a2a2a] backdrop-blur flex flex-wrap justify-between gap-2">
                     {[
                       { name: "GitHub", url: "https://github.com/riabrez" },
                       { name: "LinkedIn", url: "https://www.linkedin.com/in/maria-brzezinska/" },
@@ -110,7 +111,7 @@ export default function Page() {
                         href={social.url}
                         target="_blank"
                         rel="noreferrer"
-                        className="text-[11px] px-3 py-[6px] rounded-md border border-[#2a2a2a] bg-[#181818] text-center hover:border-[#3b82f6]/60 hover:text-[#93c5fd] transition whitespace-nowrap"
+                        className="flex-1 min-w-[47%] text-center text-[11px] px-3 py-[6px] rounded-md border border-[#2a2a2a] bg-[#181818] hover:border-[#3b82f6]/60 hover:text-[#93c5fd] transition"
                       >
                         {social.name}
                       </a>
@@ -119,9 +120,8 @@ export default function Page() {
                 </div>
               </div>
 
-
               {/* RIGHT COLUMN */}
-              <div className="flex-1 space-y-4">
+              <div className="flex-1 flex flex-col justify-between gap-4 min-h-[590px]">
                 {/* about box */}
                 <div className="bg-[#161616] border border-[#2a2a2a] rounded-2xl p-5 space-y-3">
                   <p className="text-sm font-bold text-[#d4d4d4]">About me</p>
@@ -129,24 +129,24 @@ export default function Page() {
                     Hey, I&apos;m Ria
                   </h1>
                   <p className="text-sm text-[#d1d5db]/80 leading-relaxed">
-                    I&apos;m Ria – a third-year Software Engineering student at the University of Glasgow
-                    with a focus on frontend and full-stack development. I love creating clean, user-friendly
-                    web applications and exploring new technologies.
+                    a third-year Software Engineering student at the University of Glasgow. I focus on frontend and full-stack development.
+                    When I’m not coding, you’ll probably find me experimenting with music software, 
+                    writing the occasional movie review, or getting lost in a new playlist.
+                     I love anything creative that lets me mix logic and imagination.
                   </p>
                   <p className="text-sm text-[#9ca3af]">
-                    Currently exploring React, Next.js, and TypeScript. Always eager to learn and take on new
-                    challenges!
+                    Currently exploring React, Next.js, and TypeScript. Always eager to
+                    learn and take on new challenges!
                   </p>
                 </div>
 
-                {/* bottom two cards */}
-                <div className="grid sm:grid-cols-2 gap-3 items-stretch">
+                {/* bottom cards */}
+                <div className="grid sm:grid-cols-2 gap-3 items-stretch flex-1">
                   {/* modules */}
                   <div className="bg-[#161616] border border-[#2a2a2a] rounded-xl p-3 flex flex-col h-full">
                     <p className="text-xs font-semibold text-white mb-1">
                       current modules 📚
                     </p>
-                    <br></br>
                     <ol className="text-sm text-[#d4d4d4] space-y-1 mt-1 leading-loose">
                       <li>• Algorithmics</li>
                       <li>• Systems Programming</li>
@@ -157,9 +157,9 @@ export default function Page() {
                   </div>
 
                   {/* now playing */}
-                  <div className="bg-[#161616] border border-[#2a2a2a] rounded-xl p-3 flex flex-col h-full">
+                  <div className="bg-[#161616] border border-[#2a2a2a] rounded-xl p-3 flex flex-col h-full min-h-[190px]">
                     <p className="text-xs font-semibold text-white mb-2 flex items-center gap-1">
-                      now playing 🧠
+                      now playing 🎧
                     </p>
                     <div className="flex-1 min-h-0">
                       <NowPlaying />
