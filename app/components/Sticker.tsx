@@ -7,7 +7,7 @@ export default function Sticker() {
     <div
       className="
         pointer-events-none
-        fixed md:absolute
+        absolute
         bottom-6 md:bottom-[150px]
         right-4 md:right-[240px]
         z-[999]

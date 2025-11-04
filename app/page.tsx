@@ -31,8 +31,8 @@ export default function Page() {
   const [lastUpdated, setLastUpdated] = useState("");
 
   return (
-    <div className="w-full min-h-screen flex items-center justify-center px-4 py-10">
-      <div className="w-full max-w-5xl bg-[#111111] rounded-[1.75rem] border border-[#1f1f1f] shadow-[0_14px_0_#000000]/70 overflow-hidden">
+    <div className="w-full min-h-screen flex items-center justify-center px-4 py-10 relative">
+      <div className="w-full max-w-5xl bg-[#111111] rounded-[1.75rem] border border-[#1f1f1f] shadow-[0_14px_0_#000000]/70 overflow-hidden relative">
         {/* stitched top bar */}
         <div className="bg-stitch-dark border-b border-[#1f1f1f] px-5 py-2 flex items-center justify-between text-[11px] text-[#e5e5e5]/85">
           <span className="font-semibold">riabrez</span>
